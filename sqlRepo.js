@@ -1,7 +1,11 @@
 const db = require('better-sqlite3')('./bot.db');
 
-function GetLastPixelITChnageLogID() {
-    var result = db.prepare('select * from forumchangelog').get();
+module.exports.GetLastPixelITChangelogID = GetLastPixelITChangelogID;
+module.exports.SaveLastPixelITChangelogID = SaveLastPixelITChangelogID
+module.exports.CheckDatabase = CreateDatabase
+
+function GetLastPixelITChangelogID() {
+    var result = db.prepare('select * from PixelITChangelog').get();
 
     if (!result) {
         result = -1;
@@ -12,10 +16,11 @@ function GetLastPixelITChnageLogID() {
     return result;
 }
 
-function SaveLastPixelITChnageLogID(lastID) {
-    db.prepare('delete from forumchangelog').run();
-    db.prepare('insert into forumchangelog (lastid) values (?)').run(lastID);
+function SaveLastPixelITChangelogID(lastID) {
+    db.prepare('delete from PixelITChangelog').run();
+    db.prepare('insert into PixelITChangelog (lastid) values (?)').run(lastID);
 }
 
-module.exports.GetLastPixelITChnageLogID = GetLastPixelITChnageLogID;
-module.exports.SaveLastPixelITChnageLogID = SaveLastPixelITChnageLogID
+function CreateDatabase() {
+    db.prepare('CREATE TABLE IF NOT EXISTS PixelITChangelog(LastID number)').run();
+}

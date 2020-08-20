@@ -40,6 +40,7 @@ bot.login(TOKEN);
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
     console.info('Starting Pixel IT ChnageLog checker..');
+    repo.CheckDatabase();
     setInterval(test, 1000);
 });
 /*
@@ -55,7 +56,7 @@ bot.on('message', msg => {
 
     }
 
-    if (msg.content === 'how to embed') {
+    if (msg.content === 'embed') {
         const embed = new MessageEmbed()
             .setTitle('A slick little embed')
             .setColor(0xff0000)
@@ -147,14 +148,14 @@ async function test() {
         return Number(posts[posts.length - 1].id);
     });
 
-    var dbResult = repo.GetLastPixelITChnageLogID();
+    var dbResult = repo.GetLastPixelITChangelogID();
 
     var result = await Promise.all([webResult, dbResult]);
 
     var test = result[0] === result[1];
 
     if (!test) {
-        repo.SaveLastPixelITChnageLogID(result[0])
+        repo.SaveLastPixelITChangelogID(result[0])
     }
 
     console.log(result[0]);
