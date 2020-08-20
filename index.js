@@ -1,34 +1,48 @@
+const fs = require('fs');
 const axios = require('axios');
-const sqlite3 = require('sqlite3').verbose();
 require('dotenv').config();
 const Discord = require('discord.js');
-const bot = new Discord.Client();
-const MessageAttachment = Discord.MessageAttachment;
-const MessageEmbed = Discord.MessageEmbed;
+const repo = require('./sqlRepo');
+//const MessageAttachment = Discord.MessageAttachment;
+//const MessageEmbed = Discord.MessageEmbed;
 const TOKEN = process.env.TOKEN;
-
-let db = new sqlite3.Database('./bot.db', (err) => {
-    if (err) {
-        console.error(err.message);
-    }
-    console.log('Connected to the bot database.');
-});
-
-db.all("select count(*) from ForumChangelog", [], (err, rows) => {
-    if (err) {
-        db.run('CREATE TABLE ForumChangelog(LastID number)');
-        console.log('Create ForumChangelog table.');
-    }
-});
-
 // https://discordapp.com/oauth2/authorize?&client_id=EURE-CLIENT-ID&scope=bot&permissions=8
+const bot = new Discord.Client();
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
+bot.events = new Discord.Collection();
+
+//Command Handler
+fs.readdir("./commands/", (err, files) => {
+    if (err) return console.log(err);
+    files.forEach(file => {
+        if (!file.endsWith(".js")) return;
+        let props = require(`./commands/${file}`);
+        console.log("Successfully loaded " + file)
+        let commandName = file.split(".")[0];
+        bot.commands.set(commandName, props);
+    });
+});
+
+//Events "handler"
+fs.readdir('./events/', (err, files) => {
+    if (err) console.log(err);
+    files.forEach(file => {
+        let eventFunc = require(`./events/${file}`);
+        console.log("Successfully loaded " + file)
+        let eventName = file.split(".")[0];
+        bot.on(eventName, (...args) => eventFunc.run(bot, ...args));
+    });
+});
 
 bot.login(TOKEN);
 
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
+    console.info('Starting Pixel IT ChnageLog checker..');
+    setInterval(test, 1000);
 });
-
+/*
 bot.on('message', msg => {
     if (msg.content === 'ping') {
         msg.reply('pong');
@@ -116,6 +130,8 @@ bot.on('message', msg => {
     }
 });
 
+*/
+
 bot.on('guildMemberAdd', member => {
     // Send the message to a designated channel on a server:
     const channel = member.guild.channels.cache.find(x => x.name === 'member-log');
@@ -125,32 +141,23 @@ bot.on('guildMemberAdd', member => {
     channel.send(`Welcome to the server, ${member}`);
 });
 
-
-setInterval(BastelbunkerForumChangelogUpdateCheck, 1000);
-
-function BastelbunkerForumChangelogUpdateCheck() {
-    const _currentID = GetBastelbunkerForumChangelogLastID();
-    const _lastID = GetBastelbunkerForumChangelogLastIDFromDB();
-}
-
-function GetBastelbunkerForumChangelogLastID() {
-    var result = 0;
-    axios.get("https://forum.bastelbunker.de/api/discussions/21")
-        .then(response => {
-            const posts = response.data.data.relationships.posts.data;
-            result = posts[posts.length - 1].id;
-            console.log(result);
-        });
-    return result;
-}
-
-function GetBastelbunkerForumChangelogLastIDFromDB() {
-    var result = -1;
-    var huhu = db.all("select LastID from ForumChangelog", (rows) => {
-        return rows[0] ? rows[0].LastID : 0;
+async function test() {
+    var webResult = axios.get("https://forum.bastelbunker.de/api/discussions/21").then(response => {
+        const posts = response.data.data.relationships.posts.data;
+        return Number(posts[posts.length - 1].id);
     });
 
-    while (result === -1) { }
+    var dbResult = repo.GetLastPixelITChnageLogID();
 
-    return result;
+    var result = await Promise.all([webResult, dbResult]);
+
+    var test = result[0] === result[1];
+
+    if (!test) {
+        repo.SaveLastPixelITChnageLogID(result[0])
+    }
+
+    console.log(result[0]);
+    console.log(result[1]);
+    console.log(test);
 }
