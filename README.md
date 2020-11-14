@@ -1,6 +1,6 @@
-# discrodBot
+# discordBot
 
-I created the discrodBot as a practice project to learn NosdeJs.
+I created the discordBot as a practice project to learn NosdeJs.
 So here are some not so perfect code examples!
 
 ## Installation
