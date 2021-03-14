@@ -6,11 +6,10 @@ module.exports.run = async (client, message) => {
         return;
     }
     // Starts the incoming message with the prefix?
-    if (message.content.startsWith(prefix)) {
-
+    if (message.content.startsWith(prefix)) {        
         const messageArray = message.content.split(' ');
         const cmd = messageArray[0];
-        const args = messageArray.slice(1);
+        const args = messageArray.slice(prefix.length);
         const commandfile = client.commands.get(cmd.slice(prefix.length)) || client.aliases.get(cmd.slice(prefix.length));
 
         if (!commandfile){
