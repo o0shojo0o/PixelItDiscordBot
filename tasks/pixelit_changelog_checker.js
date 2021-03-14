@@ -9,7 +9,6 @@ const newsChannel = process.env.NEWS_CHANNEL;
 
 module.exports.run = async (client) => {
     discordClient = client;
-    await sqlRepo.checkDatabase();
     await checkNewChangeLogPost();
     requestTimer();
 }

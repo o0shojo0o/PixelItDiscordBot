@@ -2,16 +2,17 @@ const fs = require('fs');
 const axios = require('axios');
 require('dotenv').config();
 const Discord = require('discord.js');
-const repo = require('./sqlRepo');
+const sqlRepo = require('./sqlRepo');
 //const MessageAttachment = Discord.MessageAttachment;
 //const MessageEmbed = Discord.MessageEmbed;
-const TOKEN = process.env.TOKEN;
+const botToken = process.env.BOT_TOKEN;
 // https://discordapp.com/oauth2/authorize?&client_id=EURE-CLIENT-ID&scope=bot&permissions=8
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 bot.events = new Discord.Collection();
 
+sqlRepo.checkDatabase();
 // Read all command Handler in commands dir
 fs.readdir("./commands/", (err, files) => {
     if (err){
@@ -49,7 +50,7 @@ fs.readdir('./events/', (err, files) => {
     };
 });
 
-bot.login(TOKEN);
+bot.login(botToken);
 
 bot.on('ready', () => {  
     fs.readdir('./tasks/', (err, files) => {
