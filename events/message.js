@@ -1,3 +1,5 @@
+'use strict';
+
 const prefix = "!"
 
 module.exports.run = async (client, message) => {

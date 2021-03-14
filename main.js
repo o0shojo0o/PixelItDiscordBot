@@ -1,8 +1,10 @@
+'use strict';
+
 const fs = require('fs');
 const axios = require('axios');
 require('dotenv').config();
 const Discord = require('discord.js');
-const sqlRepo = require('./sqlRepo');
+const sqlRepo = require('./lib/sqlRepo');
 //const MessageAttachment = Discord.MessageAttachment;
 //const MessageEmbed = Discord.MessageEmbed;
 const botToken = process.env.BOT_TOKEN;

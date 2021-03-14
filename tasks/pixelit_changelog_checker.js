@@ -1,8 +1,10 @@
+'use strict';
+
 require('dotenv').config();
 const axios = require('axios');
 const cheerio = require('cheerio');
 const messageEmbed = require('discord.js').MessageEmbed;
-const sqlRepo = require('../sqlRepo');
+const sqlRepo = require('../lib/sqlRepo');
 let discordClient;
 const requestIntervalSec = process.env.PIXELIT_CHANNGELOG_INTERVAL;
 const newsChannel = process.env.NEWS_CHANNEL;
