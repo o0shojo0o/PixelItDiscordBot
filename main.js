@@ -70,7 +70,7 @@ bot.on('ready', () => {
         };
     }); 
     
-    console.info(`Logged in as ${bot.user.tag}!`);
+    console.log(`Logged in as ${bot.user.tag}!`);
 });
 /*
 bot.on('guildMemberAdd', member => {
