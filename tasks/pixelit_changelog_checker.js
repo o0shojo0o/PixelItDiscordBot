@@ -46,7 +46,7 @@ async function checkNewChangeLogPost() {
             .setTitle(`:arrow_up: ${title} :arrow_up:`)
             .setColor(0x66ff66)
             .setURL(useUrl)
-            .setDescription('Es steht ein neues Update zur Verfügbar.')     
+            .setDescription('Es steht ein neues Update zur Verfügung.')     
         
         discordClient.channels.cache.get(newsChannel).send(embed);
     }
