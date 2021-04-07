@@ -28,6 +28,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
         #repository: ${{ github.repository }}/pixel-it-discord-bot-image
-        repository: pixel-it-discord-bot-image
+        repository: pixel-it-discord-bot-image/pixel-it-discord-bot-image
         tag_with_sha: true
         tag_with_ref: true
