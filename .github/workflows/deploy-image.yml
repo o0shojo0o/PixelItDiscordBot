@@ -1,7 +1,7 @@
 name: Create and publish a package
 on:
-  push:
-    branches: ['release']
+  release:
+    types: [created]
 jobs:
   run-npm-build:
     runs-on: ubuntu-latest
