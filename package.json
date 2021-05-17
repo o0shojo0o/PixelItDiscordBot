@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": ">=0.21.1",
-    "better-sqlite3": "^7.1.5",
+    "better-sqlite3": "^7.4.0",
     "cheerio": "^1.0.0-rc.6",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0"
