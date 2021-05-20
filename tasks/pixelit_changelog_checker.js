@@ -10,6 +10,8 @@ const requestIntervalSec = process.env.PIXELIT_CHANNGELOG_INTERVAL;
 const newsChannel = process.env.NEWS_CHANNEL;
 
 module.exports.run = async (client) => {
+    // Deactivate !!!!
+    return;
     discordClient = client;
     await checkNewChangeLogPost();
     requestTimer();
