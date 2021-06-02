@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": ">=0.21.1",
     "better-sqlite3": "^7.4.0",
-    "cheerio": "^1.0.0-rc.6",
+    "cheerio": "^1.0.0-rc.9",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0"
   }
