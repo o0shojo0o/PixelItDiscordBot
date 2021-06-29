@@ -38,7 +38,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            my-docker-hub-namespace/my-docker-hub-repository
+            o0shojo0o/pixelit-discord-bot
             ghcr.io/${{ github.repository }}
       
       - name: Build and push Docker images
