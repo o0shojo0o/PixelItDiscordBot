@@ -13,8 +13,12 @@ npm install
 
 ## Usage
 Create an .env file in the root directory with the contents: 
-```bash
-TOKEN=<TOKEN>
+```.env
+BOT_TOKEN=<DiscordBotToken>
+PIXELIT_API_TOKEN=<PIXELITToken>
+PIXELIT_CHANNGELOG_INTERVAL=<Interval (sec.)>
+PIXELIT_NEW_IMAGE_INTERVAL=<Interval (sec.)>
+NEWS_CHANNEL=<ChannelID>
 ```
 
 ## License
