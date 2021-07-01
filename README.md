@@ -11,8 +11,6 @@ Use docker-compose
 pixel_discord_bot:
   image: ghcr.io/o0shojo0o/docker-pixelit-discord-bot:latest
   container_name: pixel-discord-bot 
-  networks:    
-    root-network:
   volumes:
     - /etc/localtime:/etc/localtime:ro
     - ./pixel_discord_bot/database:/usr/src/app/database/:rw
