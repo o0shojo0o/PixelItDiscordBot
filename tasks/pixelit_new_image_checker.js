@@ -24,7 +24,7 @@ async function requestTimer(){
 }
 
 async function checkNewImage() {
-    const newImageObj = await axios.get(`https://api.bastelbunker.de/PixelItService/GetBMPNewst?token=${pixeltiApiToken}`);
+    const newImageObj = await axios.get(`https://pixelit.bastelbunker.de/api/GetBMPNewst?token=${pixeltiApiToken}`);
     
     const lastImageID = Number(newImageObj.data.id);  
     const userName = newImageObj.data.username;
