@@ -9,7 +9,7 @@ const sqlRepo = require('./lib/sqlRepo');
 //const MessageEmbed = Discord.MessageEmbed;
 const botToken = process.env.BOT_TOKEN;
 // https://discordapp.com/oauth2/authorize?&client_id=EURE-CLIENT-ID&scope=bot&permissions=8
-const bot = new Discord.Client();
+const bot = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 bot.events = new Discord.Collection();
@@ -17,15 +17,15 @@ bot.events = new Discord.Collection();
 sqlRepo.checkDatabase();
 // Read all command Handler in commands dir
 fs.readdir("./commands/", (err, files) => {
-    if (err){
+    if (err) {
         return console.log(err);
-    } 
+    }
 
-    for (const key in files){        
-        if (!files[key].endsWith(".js")){
+    for (const key in files) {
+        if (!files[key].endsWith(".js")) {
             return;
-        } 
-        const props = require(`./commands/${files[key]}`);        
+        }
+        const props = require(`./commands/${files[key]}`);
         const commandName = files[key].split(".")[0];
         bot.commands.set(commandName, props);
         console.log(`Successfully command ${files[key]} loaded.`);
@@ -34,19 +34,19 @@ fs.readdir("./commands/", (err, files) => {
 
 //Events "handler"
 fs.readdir('./events/', (err, files) => {
-    if (err){
+    if (err) {
         return console.log(err);
-    } 
+    }
 
-    for (const key in files){        
-        if (!files[key].endsWith(".js")){
+    for (const key in files) {
+        if (!files[key].endsWith(".js")) {
             return;
-        } 
-        const eventFunc = require(`./events/${files[key]}`);        
+        }
+        const eventFunc = require(`./events/${files[key]}`);
         const eventName = files[key].split(".")[0];
         bot.on(eventName, (...args) => {
-                eventFunc.run(bot, ...args)
-            }
+            eventFunc.run(bot, ...args)
+        }
         );
         console.log(`Successfully event ${files[key]} loaded.`);
     };
@@ -54,22 +54,22 @@ fs.readdir('./events/', (err, files) => {
 
 bot.login(botToken);
 
-bot.on('ready', () => {  
+bot.on('ready', () => {
     fs.readdir('./tasks/', (err, files) => {
-        if (err){
+        if (err) {
             return console.log(err);
-        } 
-    
-        for (const key in files){        
-            if (!files[key].endsWith(".js")){
+        }
+
+        for (const key in files) {
+            if (!files[key].endsWith(".js")) {
                 return;
-            } 
+            }
             console.log(`Successfully task ${files[key]} loaded.`);
             const taskFunc = require(`./tasks/${files[key]}`);
-            taskFunc.run(bot);    
+            taskFunc.run(bot);
         };
-    }); 
-    
+    });
+
     console.log(`Logged in as ${bot.user.tag}!`);
 });
 /*

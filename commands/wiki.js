@@ -10,8 +10,8 @@ module.exports = {
             .setThumbnail('https://docs.bastelbunker.de/hero.png')
             .setURL('https://docs.bastelbunker.de/')
             .setDescription(`Hier ist alles noch mal dokumentiert.
-            https://docs.bastelbunker.de/`);  
+            https://docs.bastelbunker.de/`);
         //message.react('👍');
-        message.channel.send(response);
+        message.channel.send({ embeds: [response] });
     },
 };

@@ -10,8 +10,8 @@ module.exports = {
             .setImage('https://docs.bastelbunker.de/einsteiger_flow.png')
             .setURL('https://docs.bastelbunker.de/pixelit/tools.html#einsteiger-flow')
             .setDescription(`Eine kleine Einstiegshilfe 😊.
-            https://docs.bastelbunker.de/pixelit/tools.html#einsteiger-flow`);  
+            https://docs.bastelbunker.de/pixelit/tools.html#einsteiger-flow`);
         //message.react('👍');
-        message.channel.send(response);
+        message.channel.send({ embeds: [response] });
     },
 };

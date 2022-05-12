@@ -12,8 +12,8 @@ module.exports = {
             :white_small_square: **!beginner** | zeigt den Einsteiger Beispiel Flow Link
             :white_small_square: **!gallery** | zeigt den Pixel Gallery Link
             :white_small_square: **!creator** | zeigt den Pixel Creator Link
-            :white_small_square: **!help** | zeigt diese Hilfe...`);  
+            :white_small_square: **!help** | zeigt diese Hilfe...`);
         //message.react('👍');
-        message.channel.send(response);
+        message.channel.send({ embeds: [response] });
     },
 };

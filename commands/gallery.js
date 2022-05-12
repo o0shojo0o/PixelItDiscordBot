@@ -10,8 +10,8 @@ module.exports = {
             .setThumbnail('https://docs.bastelbunker.de/pixel_gallery.png')
             .setURL('https://docs.bastelbunker.de/pixelit/tools.html#pixel-gallery')
             .setDescription(`Die Sammelsteller unser tollen BMP (PixelArt) Bilder.
-            https://docs.bastelbunker.de/pixelit/tools.html#pixel-gallery`);  
+            https://docs.bastelbunker.de/pixelit/tools.html#pixel-gallery`);
         //message.react('👍');
-        message.channel.send(response);
+        message.channel.send({ embeds: [response] });
     },
 };
