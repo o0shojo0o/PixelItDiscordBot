@@ -11,7 +11,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.16.1",
     "axios": ">=1.6.4",
-    "better-sqlite3": "^9.0.0",
+    "better-sqlite3": "^9.2.2",
     "cheerio": "^1.0.0-rc.12",
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1"
