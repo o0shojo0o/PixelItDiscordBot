@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/voice": "^0.16.1",
+    "@discordjs/voice": "^0.17.0",
     "axios": ">=1.6.8",
     "better-sqlite3": "^9.4.5",
     "cheerio": "^1.0.0-rc.12",
